@@ -2,7 +2,9 @@
 
 Deploy AI actors with on-chain identity in one click.
 
-> **Live:** https://45-63-23-184.nip.io  ·  **Source:** https://github.com/fozagtx/kitebase
+### 🌐 Live demo → **<https://45-63-23-184.nip.io>**
+
+[![live](https://img.shields.io/badge/live-45--63--23--184.nip.io-0074EC?style=flat-square)](https://45-63-23-184.nip.io) [![source](https://img.shields.io/badge/source-fozagtx%2Fkitebase-002259?style=flat-square&logo=github)](https://github.com/fozagtx/kitebase)
 
 Each actor gets its own wallet, identity, and budget. It pays, books, and signs autonomously — on the Kite chain.
 
