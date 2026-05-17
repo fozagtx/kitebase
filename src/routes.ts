@@ -126,6 +126,13 @@ export function createRouter(deps: RouterDeps): (req: Request) => Promise<Respon
       return json({ user: publicUser(me) });
     }
 
+    // Static UI from dist/ (public, no auth) - must come BEFORE the
+    // authed-routes guard so unauthenticated visitors get the login page.
+    if (method === 'GET' && !pathname.startsWith('/v1/')) {
+      const staticResp = await serveStatic(pathname);
+      if (staticResp) return staticResp;
+    }
+
     // ---- Authed routes below -------------------------------------------
     if (!me) {
       return json({ error: 'authentication required' }, { status: 401 });
@@ -289,6 +296,30 @@ export function createRouter(deps: RouterDeps): (req: Request) => Promise<Respon
 
     return json({ error: 'not found' }, { status: 404 });
   };
+}
+
+// Serve a built file from dist/. Returns null when the file doesn't exist
+// AND the path looks like a static asset (so we don't shadow real 404s).
+// For SPA routes (no extension), falls back to dist/index.html so client-side
+// routing works.
+async function serveStatic(pathname: string): Promise<Response | null> {
+  const cleaned = pathname === '/' ? '/index.html' : pathname;
+  const filePath = `dist${cleaned}`;
+  const file = Bun.file(filePath);
+  if (await file.exists()) {
+    return new Response(file);
+  }
+  // SPA fallback: no extension => assume client-side route, return index.html
+  const hasExtension = /\.[a-zA-Z0-9]{1,6}$/.test(cleaned);
+  if (!hasExtension) {
+    const index = Bun.file('dist/index.html');
+    if (await index.exists()) {
+      return new Response(index, {
+        headers: { 'content-type': 'text/html; charset=utf-8' },
+      });
+    }
+  }
+  return null;
 }
 
 function publicUser(u: { id: string; email: string; kiteAddress: string | null; createdAt: number }) {
