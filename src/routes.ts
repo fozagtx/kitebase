@@ -128,7 +128,7 @@ export function createRouter(deps: RouterDeps): (req: Request) => Promise<Respon
 
     // Static UI from dist/ (public, no auth) - must come BEFORE the
     // authed-routes guard so unauthenticated visitors get the login page.
-    if (method === 'GET' && !pathname.startsWith('/v1/')) {
+    if ((method === 'GET' || method === 'HEAD') && !pathname.startsWith('/v1/')) {
       const staticResp = await serveStatic(pathname);
       if (staticResp) return staticResp;
     }

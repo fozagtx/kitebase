@@ -75,6 +75,13 @@ if ! command -v caddy >/dev/null 2>&1; then
   apt-get install -y caddy
 fi
 
+# Vultr's Ubuntu image ships UFW default-deny with only SSH open. Open HTTP/HTTPS
+# so Let's Encrypt can reach us for the cert challenge.
+if command -v ufw >/dev/null 2>&1; then
+  ufw allow 80/tcp || true
+  ufw allow 443/tcp || true
+fi
+
 PUB_IP=$(curl -s --max-time 10 https://api.ipify.org || curl -s --max-time 10 https://ifconfig.me)
 NIP_HOST="\${PUB_IP//./-}.nip.io"
 echo "public ip: $PUB_IP"

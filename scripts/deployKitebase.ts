@@ -87,6 +87,12 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /
 apt-get update
 apt-get install -y caddy
 
+# Open HTTP/HTTPS in UFW (Vultr's Ubuntu image ships with UFW default-deny + only 22)
+if command -v ufw >/dev/null 2>&1; then
+  ufw allow 80/tcp || true
+  ufw allow 443/tcp || true
+fi
+
 # Discover our public IPv4 + derive the nip.io hostname
 PUB_IP=$(curl -s --max-time 10 https://api.ipify.org || curl -s --max-time 10 https://ifconfig.me)
 NIP_HOST="\${PUB_IP//./-}.nip.io"
