@@ -2,9 +2,9 @@
 
 Deploy AI actors with on-chain identity in one click.
 
-### 🌐 Live demo → **<https://kitechain.zanbuilds.workers.dev>**
+### 🌐 Live demo → **<https://kitebase.zanbuilds.workers.dev>**
 
-[![live](https://img.shields.io/badge/live-kitechain.zanbuilds.workers.dev-0074EC?style=flat-square)](https://kitechain.zanbuilds.workers.dev) [![source](https://img.shields.io/badge/source-fozagtx%2Fkitebase-002259?style=flat-square&logo=github)](https://github.com/fozagtx/kitebase) [![kite](https://img.shields.io/badge/built%20on-Kite%20chain-002259?style=flat-square)](https://gokite.ai)
+[![live](https://img.shields.io/badge/live-kitebase.zanbuilds.workers.dev-0074EC?style=flat-square)](https://kitebase.zanbuilds.workers.dev) [![source](https://img.shields.io/badge/source-fozagtx%2Fkitebase-002259?style=flat-square&logo=github)](https://github.com/fozagtx/kitebase) [![kite](https://img.shields.io/badge/built%20on-Kite%20chain-002259?style=flat-square)](https://gokite.ai)
 
 Each actor gets its own **Kite Agent Passport** — a `did:kite` identity, an AA wallet derived via `gokite-aa-sdk`, and the runtime, channels, and inference to act on that identity. It pays, books, signs, and runs autonomously.
 
