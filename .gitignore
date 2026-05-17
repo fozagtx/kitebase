@@ -1,0 +1,19 @@
+node_modules/
+dist/
+.next/
+.turbo/
+*.tsbuildinfo
+.DS_Store
+.env
+.env.local
+.env.*.local
+*.log
+coverage/
+
+# local database files - never commit (contains user data + agent keys)
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# scratch/internal docs
+claudedocs/
